@@ -3,7 +3,7 @@ from base64 import b64encode
 import json
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-
+import os
 
 token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
