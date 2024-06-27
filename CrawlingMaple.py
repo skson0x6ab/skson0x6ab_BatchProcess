@@ -20,8 +20,8 @@ if __name__ == "__main__":
     for item in range(len(tmpHTML)):
         tmpdata = {
             "Category": item,
-            "Text": tmpHTML(item).find('span').get_text(strip=True),
-            "Date": tmpHTML(item).find('dd').get_text(strip=True)
+            "Text": tmpHTML[item].find('span').get_text(strip=True),
+            "Date": tmpHTML[item].find('dd').get_text(strip=True)
         }
 
         DictionaryData.append(tmpdata)
