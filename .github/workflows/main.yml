@@ -9,7 +9,7 @@ jobs:
   run-code:
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
