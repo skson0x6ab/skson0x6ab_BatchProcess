@@ -1,4 +1,4 @@
-name: Run Python Code
+name: WebCrawling Cronjob.py
 
 on:
   schedule:
