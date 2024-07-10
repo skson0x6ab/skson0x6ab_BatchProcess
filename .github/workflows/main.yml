@@ -27,6 +27,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Run StarRail Python script
+        run: python CrawlingStarRail.py
 
       - name: Run FF14 Python script
         run: python CrawlingFF14.py
