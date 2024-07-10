@@ -8,17 +8,16 @@ import os
 token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
 repo = 'DataRepository'
-file_path = 'StarRail.json'
-url = 'https://hsr.hoyoverse.com/ko-kr/news'
+file_path = 'Genshin.json'
+url = 'https://genshin.hoyoverse.com/m/ko/news/'
 
 if __name__ == "__main__":
     response = urlopen(url)
     soup = BeautifulSoup(response, "html.parser")
-
     #테스트용 html 읽기
-    #with open('starrail.html', 'r', encoding='utf-8') as file:
+    #with open('genshin.html', 'r', encoding='utf-8') as file:
     #    soup = BeautifulSoup(file, "html.parser")
-    subParsingRule = ["sTitle:", "\"", "dtStartTime:"]
+    subParsingRule = [",\"2024-", ","]
     tmpHTML = soup.find_all('script')
     keyword = "NUXT"
     tmpHTML_2 = ""
@@ -31,21 +30,16 @@ if __name__ == "__main__":
     parts = tmpHTML_2.split(subParsingRule[0])
 
     DictionaryData = []
-    for j in range(2, len(parts)):
+    for j in range(1, len(parts)):
         tmpString = parts[j].split(subParsingRule[1])
 
-        if len(tmpString[1]) <= 7:
-            break
-
+        timestamp1 = "2024-" + tmpString[0].replace("\"","")
         text1 = tmpString[1].replace("\"", "")
-        tmpString2 = parts[j].split(subParsingRule[2])
-        timestamp1 = tmpString2[1].split(subParsingRule[1])
-        timestamp2 = timestamp1[1].replace("\"", "")
 
         tmpdata = {
             "Category": "[업데이트]",
             "Text": text1,
-            "Date": timestamp2
+            "Date": timestamp1
         }
 
         DictionaryData.append(tmpdata)

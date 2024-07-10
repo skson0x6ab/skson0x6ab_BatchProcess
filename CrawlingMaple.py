@@ -19,7 +19,7 @@ if __name__ == "__main__":
     DictionaryData = []
     for item in range(len(tmpHTML)):
         tmpdata = {
-            "Category": item,
+            "Category": "[업데이트]",
             "Text": tmpHTML[item].find('span').get_text(strip=True),
             "Date": tmpHTML[item].find('dd').get_text(strip=True)
         }

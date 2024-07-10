@@ -28,6 +28,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run StarRail Python script
+        run: python CrawlingGenshinImpact.py
+
+      - name: Run StarRail Python script
         run: python CrawlingStarRail.py
 
       - name: Run FF14 Python script
