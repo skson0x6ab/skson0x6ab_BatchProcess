@@ -5,6 +5,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import os
 import ssl
+import urllib3
 
 token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
@@ -14,8 +15,12 @@ url = 'https://www.38.co.kr/html/fund/index.htm?o=k&page=1'
 DictionaryData = []
 
 if __name__ == "__main__":
-    context = ssl._create_unverified_context()
-    response = urlopen(url, context=context)
+    #context = ssl._create_unverified_context()
+    #response = urlopen(url, context=context)
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+    response_url = requests.get(url, verify=False)
+    response = response_url.text
+
     soup = BeautifulSoup(response, "html.parser")
     tmp_1_HTML = soup.find('table', summary='공모주 청약일정').find_all('td', height='30')
 
