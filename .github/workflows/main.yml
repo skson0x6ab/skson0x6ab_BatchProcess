@@ -33,17 +33,22 @@ jobs:
 
       - name: Run GenshinImpact Python script
         run: python CrawlingGenshinImpact.py
+        continue-on-error: true
 
       - name: Run StarRail Python script
         run: python CrawlingStarRail.py
+        continue-on-error: true
 
       - name: Run FF14 Python script
         run: python CrawlingFF14.py
-        
+        continue-on-error: true
+
       - name: Run Maple Python script
         run: python CrawlingMaple.py
+        continue-on-error: true
 
       - name: Run PublicOfferingStock Python script
         run: python CrawlingPublicOfferingStockSchedule.py
+        continue-on-error: true
 
 
