@@ -11,11 +11,12 @@ token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
 repo = 'DataRepository'
 file_path = 'PublicOfferingStockSchedule.json'
-url = 'https://www.38.co.kr/html/fund/index.htm?o=k&page=1'
+url = 'https://www.38.co.kr/html/fund/'
 DictionaryData = []
 
 if __name__ == "__main__":
-    response = urlopen(url)
+    tmp_response = requests.get(url)
+    response = tmp_response.text
     soup = BeautifulSoup(response, "html.parser")
     tmp_1_HTML = soup.find('table', summary='공모주 청약일정').find_all('td', height='30')
 
