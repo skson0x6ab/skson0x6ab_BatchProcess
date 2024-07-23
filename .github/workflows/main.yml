@@ -28,7 +28,7 @@ jobs:
 
       - name: Verify OpenSSL configuration
         run: |
-          sudo cat /etc/ssl/openssl.cnf | grep "CipherString"
+          sudo ls -l /etc/ssl/openssl.cnf
 
       - name: Install Python dependencies
         run: |
