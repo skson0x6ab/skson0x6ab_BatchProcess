@@ -24,11 +24,7 @@ jobs:
 
       - name: Modify OpenSSL Configuration
         run: |
-          sudo sed -i 's/^\(CipherString.*\)$/#\1\nCipherString = DEFAULT:@SECLEVEL=1/' /etc/ssl/openssl.cnf
-
-      - name: Verify OpenSSL configuration
-        run: |
-          sudo ls -l /etc/ssl/openssl.cnf
+          sudo sh -c 'echo -e "\n[ system_default_sect ]\nCipherString = DEFAULT:@SECLEVEL=1" >> /etc/ssl/openssl.cnf'
 
       - name: Install Python dependencies
         run: |
