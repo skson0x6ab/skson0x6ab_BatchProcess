@@ -26,7 +26,7 @@ DictionaryData = []
 if __name__ == "__main__":
 
     tmp_response = http.request('GET', url)
-    response = tmp_response.data.decode('utf-8')
+    response = tmp_response.data
     soup = BeautifulSoup(response, "html.parser")
     tmp_1_HTML = soup.find('table', summary='공모주 청약일정').find_all('td', height='30')
 
