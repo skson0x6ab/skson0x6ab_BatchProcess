@@ -7,10 +7,13 @@ import urllib3
 from urllib3.util.ssl_ import create_urllib3_context
 import certifi
 
+context = create_urllib3_context()
+context.set_ciphers('DEFAULT@SECLEVEL=1')
 # SSL 설정을 위한 PoolManager 객체 생성
 http = urllib3.PoolManager(
     cert_reqs='CERT_REQUIRED',
-    ca_certs=certifi.where()  # 최신 CA 인증서 목록 제공
+    ca_certs=certifi.where(),  # 최신 CA 인증서 목록 제공
+    ssl_context=context
 )
 token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
