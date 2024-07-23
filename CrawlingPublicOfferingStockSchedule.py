@@ -33,7 +33,8 @@ if __name__ == "__main__":
     for i in tmp_1_HTML:
         tmp_a_href = i.a['href']
         tmp_url = f'https://www.38.co.kr{tmp_a_href}'
-        tmp_response = urlopen(tmp_url)
+        sub_tmp_response = http.request('GET', tmp_url)
+        tmp_response = sub_tmp_response.data
         tmp_soup = BeautifulSoup(tmp_response, "html.parser")
 
         tmp_2_HTML = tmp_soup.find('table', summary='공모청약일정').find_all('td')
