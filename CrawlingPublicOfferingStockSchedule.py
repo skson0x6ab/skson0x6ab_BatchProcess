@@ -1,21 +1,22 @@
 import requests
 from base64 import b64encode
 import json
-from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import os
 import ssl
-import urllib3
 
 token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
 repo = 'DataRepository'
 file_path = 'PublicOfferingStockSchedule.json'
 url = 'https://www.38.co.kr/html/fund/'
+ssl_context = ssl.create_default_context()
+ssl_context.set_ciphers('DEFAULT@SECLEVEL=1')
 DictionaryData = []
 
 if __name__ == "__main__":
-    tmp_response = requests.get(url)
+
+    tmp_response = requests.get(url, verify=ssl_context)
     response = tmp_response.text
     soup = BeautifulSoup(response, "html.parser")
     tmp_1_HTML = soup.find('table', summary='공모주 청약일정').find_all('td', height='30')
