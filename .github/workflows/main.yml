@@ -7,7 +7,7 @@ on:
 
 jobs:
   run-code:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     env:
       GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
     steps:
@@ -34,6 +34,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Verify OpenSSL configuration
+        run: |
+          sudo cat /etc/ssl/openssl.cnf
+        continue-on-error: true
 
       - name: Run GenshinImpact Python script
         run: python CrawlingGenshinImpact.py
