@@ -7,7 +7,7 @@ on:
 
 jobs:
   run-code:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     env:
       GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
     steps:
@@ -25,6 +25,10 @@ jobs:
       - name: Modify OpenSSL Configuration
         run: |
           sudo sed -i 's/^\(CipherString.*\)$/#\1\nCipherString = DEFAULT:@SECLEVEL=1/' /etc/ssl/openssl.cnf
+
+      - name: Verify OpenSSL configuration
+        run: |
+          sudo cat /etc/ssl/openssl.cnf | grep "CipherString"
 
       - name: Install Python dependencies
         run: |
