@@ -5,15 +5,18 @@ from bs4 import BeautifulSoup
 import os
 import urllib3 
 from urllib3.util.ssl_ import create_urllib3_context
+import certifi
 
+# SSL 설정을 위한 PoolManager 객체 생성
+http = urllib3.PoolManager(
+    cert_reqs='CERT_REQUIRED',
+    ca_certs=certifi.where()  # 최신 CA 인증서 목록 제공
+)
 token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
 repo = 'DataRepository'
 file_path = 'PublicOfferingStockSchedule.json'
 url = 'https://www.38.co.kr/html/fund/'
-context = create_urllib3_context()
-context.set_ciphers('DEFAULT@SECLEVEL=1')
-http = urllib3.PoolManager(ssl_context=context)
 
 DictionaryData = []
 
