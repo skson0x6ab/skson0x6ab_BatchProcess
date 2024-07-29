@@ -39,9 +39,11 @@ if __name__ == "__main__":
 
         tmp_2_HTML = tmp_soup.find('table', summary='공모청약일정').find_all('td')
         tmp_3_HTML = tmp_soup.find('table', summary='기업개요').find_all('td')
+        tmp_4_HTML = tmp_soup.find('table', summary='공모정보').find_all('td')
 
         tmp_data = {
             "stockname": tmp_3_HTML[1].get_text(strip=True),
+            "securities": tmp_4_HTML[15].get_text(strip=True),
             "schedule": tmp_2_HTML[4].get_text(strip=True),
             "buy": tmp_2_HTML[10].get_text(strip=True),
             "subscription": tmp_2_HTML[12].get_text(strip=True),
