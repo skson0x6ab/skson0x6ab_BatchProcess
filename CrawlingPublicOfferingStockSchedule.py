@@ -47,6 +47,7 @@ if __name__ == "__main__":
             "schedule": tmp_2_HTML[4].get_text(strip=True),
             "buy": tmp_2_HTML[10].get_text(strip=True),
             "subscription": tmp_2_HTML[12].get_text(strip=True),
+            "competiton": tmp_4_HTML[9].get_text(strip=True),
         }
         DictionaryData.append(tmp_data)
 
