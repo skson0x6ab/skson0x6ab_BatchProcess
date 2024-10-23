@@ -59,9 +59,11 @@ jobs:
           sudo git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           sudo git add ./starrail
           sudo git commit -m "Add downloaded files"
-          sudo git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/skson0x6ab/DataRepository.git
+          sudo git remote set-url origin https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/skson0x6ab/DataRepository.git
           sudo echo "Token: ${{ secrets.GIT_TOKEN }}"
           sudo git push origin HEAD:main
+        env:
+          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
 
           
 
