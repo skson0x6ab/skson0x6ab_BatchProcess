@@ -5,6 +5,12 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import os
 from requests_html import HTMLSession
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+
 
 token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
@@ -14,13 +20,17 @@ url = 'https://hsr.hoyoverse.com/ko-kr/news'
 #url = 'https://www.38.co.kr/'
 #os.environ['PYPPETEER_CHROMIUM_REVISION'] = '1263111'
 if __name__ == "__main__":
-    #response = urlopen(url)
+    response = urlopen(url)
+    #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    #driver.get(url)
 
-    session = HTMLSession()
-    response = session.get(url)
-    response.html.render(sleep=60)
+    #time.sleep(120)
 
-    soup = BeautifulSoup(response.html.html, "html.parser")
+    #session = HTMLSession()
+    #response = session.get(url)
+    #response.html.render(sleep=120)
+
+    soup = BeautifulSoup(response, "html.parser")
 
     #테스트용 html 읽기
     #with open('starrail.html', 'r', encoding='utf-8') as file:

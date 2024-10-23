@@ -20,7 +20,7 @@ jobs:
           python-version: 3.9
 
       - name: Install system dependencies
-        run: sudo apt-get update && sudo apt-get install -y build-essential libffi-dev && sudo apt-get install -y ca-certificates
+        run: sudo apt-get update && sudo apt-get install -y build-essential libffi-dev && sudo apt-get install -y ca-certificates && sudo apt-get install -y wget
 
       - name: Install Python dependencies
         run: |
@@ -47,4 +47,19 @@ jobs:
         run: python CrawlingPublicOfferingStockSchedule.py
         continue-on-error: true
 
+      - name: Run wget StarRail
+        run: |
+          mkdir -p /starrail
+          wget --mirror --convert-links --adjust-extension --page-requisites --no-parent --no-check-certificate -P /starrail https://hsr.hoyoverse.com/ko-kr/news
+        continue-on-error: true
+
+      - name: Commit and Push changes to specific repo
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add ./starrail
+          git commit -m "Add downloaded files"
+          git push "${{ secrets.REPO_URL }}" HEAD:main
+
+          
 
