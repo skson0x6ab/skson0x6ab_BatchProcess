@@ -49,15 +49,15 @@ jobs:
 
       - name: Run wget StarRail
         run: |
-          sudo mkdir -p /starrail
-          sudo wget --mirror --convert-links --adjust-extension --page-requisites --no-parent --no-check-certificate -P /starrail https://hsr.hoyoverse.com/ko-kr/news
+          sudo mkdir -p ./starrail
+          sudo wget --mirror --convert-links --adjust-extension --page-requisites --no-parent --no-check-certificate -P ./starrail https://hsr.hoyoverse.com/ko-kr/news
         continue-on-error: true
 
       - name: Commit and Push changes to specific repo
         run: |
           sudo git config --global user.name 'github-actions[bot]'
           sudo git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          sudo git add /starrail
+          sudo git add ./starrail
           sudo git commit -m "Add downloaded files"
           sudo git push "${{ secrets.REPO_URL }}" HEAD:main
 
