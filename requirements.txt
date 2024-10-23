@@ -4,3 +4,5 @@ urllib3
 certifi
 requests-html
 lxml_html_clean
+selenium
+webdriver_manager
