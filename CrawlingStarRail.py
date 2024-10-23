@@ -4,21 +4,23 @@ import json
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import os
-from crawlee import Crawlee
+from requests_html import HTMLSession
 
 token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
 repo = 'DataRepository'
 file_path = 'StarRail.json'
-url = 'https://hsr.hoyoverse.com/ko-kr/news'
-
+#url = 'https://hsr.hoyoverse.com/ko-kr/news'
+url = 'https://www.38.co.kr/'
+#os.environ['PYPPETEER_CHROMIUM_REVISION'] = '1263111'
 if __name__ == "__main__":
     #response = urlopen(url)
-    crawler = Crawlee()
-    crawler.start()
-    response = crawler.craw(url)
 
-    soup = BeautifulSoup(response, "html.parser")
+    session = HTMLSession()
+    response = session.get(url)
+    response.html.render()
+
+    soup = BeautifulSoup(response.html.html, "html.parser")
 
     #테스트용 html 읽기
     #with open('starrail.html', 'r', encoding='utf-8') as file:
