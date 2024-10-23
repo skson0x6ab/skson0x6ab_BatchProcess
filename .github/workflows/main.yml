@@ -59,7 +59,7 @@ jobs:
           sudo git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           sudo git add ./starrail
           sudo git commit -m "Add downloaded files"
-          sudo git push "${{ secrets.REPO_URL }}" HEAD:main
+          sudo git push https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/skson0x6ab/DataRepository.git HEAD:main
 
           
 
