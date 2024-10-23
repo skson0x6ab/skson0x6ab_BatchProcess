@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     session = HTMLSession()
     response = session.get(url)
-    response.html.render()
+    response.html.render(sleep=60)
 
     soup = BeautifulSoup(response.html.html, "html.parser")
 
