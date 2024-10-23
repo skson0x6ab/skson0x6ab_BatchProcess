@@ -60,7 +60,7 @@ jobs:
           sudo git add ./starrail
           sudo git commit -m "Add downloaded files"
           sudo git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/skson0x6ab/DataRepository.git
-          sudo echo "Token: ${{ secrets.GH_TOKEN }}"
+          sudo echo "Token: ${{ secrets.GIT_TOKEN }}"
           sudo git push origin HEAD:main
 
           
