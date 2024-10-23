@@ -57,7 +57,7 @@ jobs:
         run: |
           sudo git config --global user.name 'github-actions[bot]'
           sudo git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          sudo git add ./starrail
+          sudo git add /starrail
           sudo git commit -m "Add downloaded files"
           sudo git push "${{ secrets.REPO_URL }}" HEAD:main
 
