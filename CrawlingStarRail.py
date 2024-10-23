@@ -4,6 +4,7 @@ import json
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import os
+from crawlee import Crawlee
 
 token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
@@ -12,7 +13,11 @@ file_path = 'StarRail.json'
 url = 'https://hsr.hoyoverse.com/ko-kr/news'
 
 if __name__ == "__main__":
-    response = urlopen(url)
+    #response = urlopen(url)
+    crawler = Crawlee()
+    crawler.start()
+    response = crawler.craw(url)
+
     soup = BeautifulSoup(response, "html.parser")
 
     #테스트용 html 읽기
@@ -51,6 +56,8 @@ if __name__ == "__main__":
         DictionaryData.append(tmpdata)
 
     jsonData = json.dumps(DictionaryData, ensure_ascii=False)
+    #임시추가
+    jsonData = soup
 
     headers = {
         'Authorization': f'token {token}',
