@@ -10,8 +10,8 @@ token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
 repo = 'DataRepository'
 file_path = 'StarRail.json'
-#url = 'https://hsr.hoyoverse.com/ko-kr/news'
-url = 'https://www.38.co.kr/'
+url = 'https://hsr.hoyoverse.com/ko-kr/news'
+#url = 'https://www.38.co.kr/'
 #os.environ['PYPPETEER_CHROMIUM_REVISION'] = '1263111'
 if __name__ == "__main__":
     #response = urlopen(url)
