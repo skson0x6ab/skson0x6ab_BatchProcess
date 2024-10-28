@@ -63,7 +63,7 @@ jobs:
       - name: Run wget StarRail
         run: |
           cd StarRailData
-          wget --mirror --convert-links --adjust-extension --page-requisites --no-parent --no-check-certificate -P ./ https://hsr.hoyoverse.com/ko-kr/news
+          wget --mirror --convert-links --adjust-extension --page-requisites --no-parent --no-check-certificate -P ./ https://hsr.hoyoverse.com/
         continue-on-error: true
 
       - name: Github commit and push changes
