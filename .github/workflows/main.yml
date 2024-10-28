@@ -53,8 +53,8 @@ jobs:
 
       - name: Github pull
         run: |
-          sudo mkdir -p ~/starrail
-          cd ~/starrail
+          sudo mkdir -p ./starrail
+          cd ./starrail
           pwd
           sudo git config --global user.name 'github-actions[bot]'
           sudo git config --global user.email 'github-actions[bot]@users.noreply.github.com'
@@ -72,9 +72,9 @@ jobs:
         run: |
           sudo git config --global user.name 'github-actions[bot]'
           sudo git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          sudo ls -l
-          sudo git add ~/starrail
-          cd ~/starrail
+          sudo git add ./starrail
+          cd ./starrail
+          pwd
           sudo git commit -m "Add downloaded files"
           sudo echo "Token: ${{ secrets.GIT_TOKEN }}"
           sudo git push https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/skson0x6ab/StarRailData.git HEAD:main
