@@ -59,7 +59,7 @@ jobs:
           sudo git config --global user.name 'github-actions[bot]'
           sudo git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           sudo git init
-          sudo git remote add origin ttps://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/skson0x6ab/StarRailData.git
+          sudo git remote add origin https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/skson0x6ab/StarRailData.git
           sudo git pull origin main
         continue-on-error: true
 
