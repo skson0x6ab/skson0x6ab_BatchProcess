@@ -27,6 +27,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Enable debug logging
+        run: echo "ACTIONS_RUNNER_DEBUG=true" >> $GITHUB_ENV
+        continue-on-error: true
+
       - name: Run GenshinImpact Python script
         run: python CrawlingGenshinImpact.py
         continue-on-error: true
@@ -59,11 +63,8 @@ jobs:
           sudo git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           sudo git add ./starrail
           sudo git commit -m "Add downloaded files"
-          sudo git remote set-url origin https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/skson0x6ab/DataRepository.git
           sudo echo "Token: ${{ secrets.GIT_TOKEN }}"
-          sudo git push origin HEAD:main
-        env:
-          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+          sudo git push https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/skson0x6ab/StarRailData.git HEAD:main
 
           
 
