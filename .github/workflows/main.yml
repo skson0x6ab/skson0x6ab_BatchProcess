@@ -61,6 +61,8 @@ jobs:
         run: |
           sudo git config --global user.name 'github-actions[bot]'
           sudo git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          sudo git pull https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/skson0x6ab/DataRepository.git main
+          sudo ls -l
           sudo git add ./starrail
           sudo git commit -m "Add downloaded files"
           sudo echo "Token: ${{ secrets.GIT_TOKEN }}"
