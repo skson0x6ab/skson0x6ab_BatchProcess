@@ -51,17 +51,23 @@ jobs:
         run: python CrawlingPublicOfferingStockSchedule.py
         continue-on-error: true
 
-      - name: Run wget StarRail
+      - name: Github pull
         run: |
           sudo mkdir -p ./starrail
+          sudo cd ./starrail
+          sudo pwd
+          sudo git config --global user.name 'github-actions[bot]'
+          sudo git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          sudo git pull https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/skson0x6ab/StarRailData.git main
+        continue-on-error: true
+
+      - name: Run wget StarRail
+        run: |
           sudo wget --mirror --convert-links --adjust-extension --page-requisites --no-parent --no-check-certificate -P ./starrail https://hsr.hoyoverse.com/ko-kr/news
         continue-on-error: true
 
-      - name: Commit and Push changes to specific repo
+      - name: Github commit and push changes to specific repo
         run: |
-          sudo git config --global user.name 'github-actions[bot]'
-          sudo git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          sudo git pull https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/skson0x6ab/DataRepository.git main
           sudo ls -l
           sudo git add ./starrail
           sudo git commit -m "Add downloaded files"
