@@ -51,32 +51,5 @@ jobs:
         run: python CrawlingPublicOfferingStockSchedule.py
         continue-on-error: true
 
-      - name: Github clone
-        run: |
-          git clone https://github.com/skson0x6ab/StarRailData.git
-          cd StarRailData
-          pwd
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        continue-on-error: true
-
-      - name: Run wget StarRail
-        run: |
-          cd StarRailData
-          wget --mirror --convert-links --adjust-extension --page-requisites --no-parent --no-check-certificate -P ./ https://hsr.hoyoverse.com/
-        continue-on-error: true
-
-      - name: Github commit and push changes
-        run: |
-          cd StarRailData
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add .
-          git status
-          pwd
-          git commit -m "Add downloaded files"
-          sudo echo "Token: ${{ secrets.GIT_TOKEN }}"
-          git push https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/skson0x6ab/StarRailData.git main
-
           
 
