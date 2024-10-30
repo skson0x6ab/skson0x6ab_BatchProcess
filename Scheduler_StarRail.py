@@ -15,12 +15,12 @@ file_path = 'StarRail.json'
 url = 'https://hsr.hoyoverse.com/ko-kr/news'
 
 if __name__ == "__main__":
-    #response = urlopen(url)
-    #soup = BeautifulSoup(response, "html.parser")
+    response = urlopen(url)
+    soup = BeautifulSoup(response, "html.parser")
 
     #테스트용 html 읽기
-    with open('starrail.html', 'r', encoding='utf-8') as file:
-        soup = BeautifulSoup(file, "html.parser")
+    #with open('starrail.html', 'r', encoding='utf-8') as file:
+    #    soup = BeautifulSoup(file, "html.parser")
     tmpHTML = soup.find_all('script')
     keyword = "NUXT"
     tmpHTML_2 = ""
