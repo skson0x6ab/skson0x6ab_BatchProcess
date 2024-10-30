@@ -5,10 +5,6 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import os
 from requests_html import HTMLSession
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 import time
 
 
@@ -17,59 +13,37 @@ owner = 'skson0x6ab'
 repo = 'DataRepository'
 file_path = 'StarRail.json'
 url = 'https://hsr.hoyoverse.com/ko-kr/news'
-#url = 'https://www.38.co.kr/'
-#os.environ['PYPPETEER_CHROMIUM_REVISION'] = '1263111'
+
 if __name__ == "__main__":
-    response = urlopen(url)
-    #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    #driver.get(url)
-
-    #time.sleep(120)
-
-    #session = HTMLSession()
-    #response = session.get(url)
-    #response.html.render(sleep=120)
-
-    soup = BeautifulSoup(response, "html.parser")
+    #response = urlopen(url)
+    #soup = BeautifulSoup(response, "html.parser")
 
     #테스트용 html 읽기
-    #with open('starrail.html', 'r', encoding='utf-8') as file:
-    #    soup = BeautifulSoup(file, "html.parser")
-    subParsingRule = ["sTitle:", "\"", "dtStartTime:"]
+    with open('starrail.html', 'r', encoding='utf-8') as file:
+        soup = BeautifulSoup(file, "html.parser")
     tmpHTML = soup.find_all('script')
     keyword = "NUXT"
     tmpHTML_2 = ""
 
     for i in tmpHTML:
-        if keyword in str(i):
-            tmpHTML_2 = str(i)
+        if keyword in i.get_text(strip=True):
+            tmpHTML_2 = i.get_text(strip=True)
             break
-
-    parts = tmpHTML_2.split(subParsingRule[0])
 
     DictionaryData = []
-    for j in range(2, len(parts)):
-        tmpString = parts[j].split(subParsingRule[1])
+    for j in range(1, 2):
 
-        if len(tmpString[1]) <= 7:
-            break
-
-        text1 = tmpString[1].replace("\"", "")
-        tmpString2 = parts[j].split(subParsingRule[2])
-        timestamp1 = tmpString2[1].split(subParsingRule[1])
-        timestamp2 = timestamp1[1].replace("\"", "")
+        text1 = tmpHTML_2
+        timestamp2 = ""
 
         tmpdata = {
             "Category": "[업데이트]",
             "Text": text1,
             "Date": timestamp2
         }
-
         DictionaryData.append(tmpdata)
 
     jsonData = json.dumps(DictionaryData, ensure_ascii=False)
-    #임시추가
-    jsonData = soup
 
     headers = {
         'Authorization': f'token {token}',
