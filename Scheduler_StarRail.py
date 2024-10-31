@@ -28,7 +28,7 @@ if __name__ == "__main__":
     driver = webdriver.Chrome(service=service, options=options)
 
     driver.get(url)
-    driver.implicitly_wait(20)
+    driver.implicitly_wait(60)
     response = driver.page_source
     #response = urlopen(url)
     soup = BeautifulSoup(response, "html.parser")
