@@ -25,7 +25,7 @@ if __name__ == "__main__":
     driver = webdriver.Chrome(service=service, options=options)
 
     driver.get(url)
-    WebDriverWait(driver, 90).until(
+    WebDriverWait(driver, 180).until(
         lambda driver: driver.execute_script("return document.readyState") == "complete"
     )
 
