@@ -28,8 +28,18 @@ if __name__ == "__main__":
     driver = webdriver.Chrome(service=service, options=options)
 
     driver.get(url)
-    driver.implicitly_wait(60)
-    response = driver.page_source
+    rseponse = ""
+    try:
+        WebDriverWait(driver, 60).until(
+            lambda driver: driver.execute_script("return document.readyState") == "complete"
+        )
+        response = driver.page_source
+
+    except:
+        print("페이지 로드에 실패했습니다.")
+    finally:
+        driver.quit()
+    print(response)
     #response = urlopen(url)
     soup = BeautifulSoup(response, "html.parser")
     #테스트용 html 읽기
