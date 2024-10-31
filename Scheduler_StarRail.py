@@ -20,10 +20,15 @@ logging.basicConfig(level=logging.INFO)
 
 if __name__ == "__main__":
 
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
     service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
+    driver = webdriver.Chrome(service=service, options=options)
+
     driver.get(url)
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(20)
     response = driver.page_source
     #response = urlopen(url)
     soup = BeautifulSoup(response, "html.parser")
