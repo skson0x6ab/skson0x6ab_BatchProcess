@@ -17,6 +17,7 @@ file_path = 'Genshin.json'
 url = 'https://genshin.hoyoverse.com/m/ko/news/'
 
 if __name__ == "__main__":
+
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
@@ -25,28 +26,32 @@ if __name__ == "__main__":
     driver = webdriver.Chrome(service=service, options=options)
 
     driver.get(url)
-    WebDriverWait(driver, 180).until(
+    WebDriverWait(driver, 600).until(
         lambda driver: driver.execute_script("return document.readyState") == "complete"
     )
 
-    time.sleep(30)
+    time.sleep(60)
 
     response = driver.page_source
-
+    
     print(response)
     soup = BeautifulSoup(response, "html.parser")
-    """
-    DictionaryData = []
-    for j in range(1, len(parts)):
-        tmpString = parts[j].split(subParsingRule[1])
 
-        timestamp1 = "2024-" + tmpString[0].replace("\"","")
-        text1 = tmpString[1].replace("\"", "")
+    #테스트용 html 읽기
+    #with open('genshin.html', 'r', encoding='utf-8') as file:
+    #    soup = BeautifulSoup(file, "html.parser")
+    news = soup.find_all('ul', class_='news')
+    news_li = news[0].find_all('li')
+
+    DictionaryData = []
+    for i in news_li:
+        news__info = i.find('div', class_='news__info').find('h3').get_text()
+        news__date = i.find('div', class_='news__date').get_text()
 
         tmpdata = {
             "Category": "[소식]",
-            "Text": text1,
-            "Date": timestamp1
+            "Text": news__info,
+            "Date": news__date
         }
 
         DictionaryData.append(tmpdata)
@@ -91,4 +96,3 @@ if __name__ == "__main__":
         print("File added/updated successfully!")
     else:
         print(f"Error: {response.json()}")
-    """
