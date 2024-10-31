@@ -4,6 +4,7 @@ import json
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import os
+import logging
 
 token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
@@ -11,27 +12,27 @@ repo = 'DataRepository'
 file_path = 'StarRail.json'
 url = 'https://hsr.hoyoverse.com/ko-kr/news'
 
+logging.basicConfig(level=logging.INFO)
+
 if __name__ == "__main__":
-    response = urlopen(url)
-    soup = BeautifulSoup(response, "html.parser")
+    #response = urlopen(url)
+    #soup = BeautifulSoup(response, "html.parser")
 
     #테스트용 html 읽기
-    #with open('starrail.html', 'r', encoding='utf-8') as file:
-    #    soup = BeautifulSoup(file, "html.parser")
+    with open('starrail.html', 'r', encoding='utf-8') as file:
+        soup = BeautifulSoup(file, "html.parser")
     tmpHTML = soup.find_all('script')
     keyword = "NUXT"
     tmpHTML_2 = ""
-
     for i in tmpHTML:
         if keyword in i.get_text(strip=True):
             tmpHTML_2 = i.get_text(strip=True)
             break
-
+    logging.info(soup)
     DictionaryData = []
     for j in range(1, 2):
 
         text1 = tmpHTML_2
-        text1 = soup
         timestamp2 = ""
 
         tmpdata = {
@@ -49,7 +50,7 @@ if __name__ == "__main__":
     }
 
     url = f'https://api.github.com/repos/{owner}/{repo}/contents/{file_path}'
-
+    
     response = requests.get(url, headers=headers)
 
     # base64로 파일 내용 인코딩
@@ -81,3 +82,4 @@ if __name__ == "__main__":
         print("File added/updated successfully!")
     else:
         print(f"Error: {response.json()}")
+    
