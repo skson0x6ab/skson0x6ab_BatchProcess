@@ -1,7 +1,6 @@
 from base64 import b64encode
 import requests
 import json
-from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import os
 import logging
@@ -17,6 +16,7 @@ repo = 'DataRepository'
 file_path = 'StarRail.json'
 url = 'https://hsr.hoyoverse.com/ko-kr/news'
 #url = 'https://www.38.co.kr/html/fund/'
+
 logging.basicConfig(level=logging.INFO)
 
 if __name__ == "__main__":
@@ -38,29 +38,27 @@ if __name__ == "__main__":
     response = driver.page_source
 
     print(response)
-    #response = urlopen(url)
     soup = BeautifulSoup(response, "html.parser")
-    #테스트용 html 읽기
-    #with open('starrail.html', 'r', encoding='utf-8') as file:
-    #    soup = BeautifulSoup(file, "html.parser")
-    tmpHTML = soup.find_all('script')
-    keyword = "NUXT"
-    tmpHTML_2 = ""
-    for i in tmpHTML:
-        if keyword in i.get_text(strip=True):
-            tmpHTML_2 = i.get_text(strip=True)
-            break
-    logging.info(soup)
-    DictionaryData = []
-    for j in range(1, 2):
 
-        text1 = tmpHTML_2
-        timestamp2 = ""
+    #테스트용 html 읽기
+    #with open('starrail2.html', 'r', encoding='utf-8') as file:
+    #    soup = BeautifulSoup(file, "html.parser")
+    right = soup.find_all('div', class_='right')
+    #news_title = soup.find_all('div', class_='news-title')
+    #date_time = soup.find_all('div', class_='date-time')
+
+    #for i in news_title:
+    #    print(i)
+    DictionaryData = []
+    for i in right:
+
+        news_title = i.find('div', class_='news-title').get_text().replace('\n', '')
+        date_time = i.find('div', class_='date-time').get_text().replace('\n', '')
 
         tmpdata = {
-            "Category": "[업데이트]",
-            "Text": text1,
-            "Date": timestamp2
+            "Category": "[소식]",
+            "Text": news_title,
+            "Date": date_time
         }
         DictionaryData.append(tmpdata)
 
@@ -104,4 +102,4 @@ if __name__ == "__main__":
         print("File added/updated successfully!")
     else:
         print(f"Error: {response.json()}")
-    
+

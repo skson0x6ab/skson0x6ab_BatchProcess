@@ -1,32 +1,55 @@
-import requests
 from base64 import b64encode
+import requests
 import json
-from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import os
+import logging
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
+import time
 
 token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
 repo = 'DataRepository'
-file_path = 'FF14.json'
-url = 'https://www.ff14.co.kr/news/notice?category=3'
+file_path = 'Genshin.json'
+url = 'https://genshin.hoyoverse.com/m/ko/news/'
 
 if __name__ == "__main__":
-    response = urlopen(url)
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+
+    driver.get(url)
+    WebDriverWait(driver, 90).until(
+        lambda driver: driver.execute_script("return document.readyState") == "complete"
+    )
+
+    time.sleep(30)
+
+    response = driver.page_source
+
+    print(response)
     soup = BeautifulSoup(response, "html.parser")
-
-    jsonCategory = soup.find_all('td', class_='type')
-    jsonText = soup.find('tbody').find_all('a')
-    jsonDate = soup.find_all('td', class_='date')
-
+    """
     DictionaryData = []
-    for i in range(len(jsonText)):
-        tmpData = {
-            "Category": jsonCategory[i].get_text(strip=True),
-            "Text": jsonText[i].get_text(strip=True),
-            "Date": jsonDate[i].get_text(strip=True)
+    for j in range(1, len(parts)):
+        tmpString = parts[j].split(subParsingRule[1])
+
+        timestamp1 = "2024-" + tmpString[0].replace("\"","")
+        text1 = tmpString[1].replace("\"", "")
+
+        tmpdata = {
+            "Category": "[소식]",
+            "Text": text1,
+            "Date": timestamp1
         }
-        DictionaryData.append(tmpData)
+
+        DictionaryData.append(tmpdata)
 
     jsonData = json.dumps(DictionaryData, ensure_ascii=False)
 
@@ -68,3 +91,4 @@ if __name__ == "__main__":
         print("File added/updated successfully!")
     else:
         print(f"Error: {response.json()}")
+    """

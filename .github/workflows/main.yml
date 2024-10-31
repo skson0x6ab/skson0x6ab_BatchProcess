@@ -32,28 +32,24 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Enable debug logging
-        run: echo "ACTIONS_RUNNER_DEBUG=true" >> $GITHUB_ENV
+      - name: Crawling GenshinImpact website
+        run: python Scheduler_GenshinImpact.py
         continue-on-error: true
 
-      - name: Run GenshinImpact Python script
-        run: python CrawlingGenshinImpact.py
-        continue-on-error: true
-
-      - name: Run StarRail Python script
+      - name: Crawling StarRail website
         run: python Scheduler_StarRail.py
         continue-on-error: true
 
-      - name: Run FF14 Python script
-        run: python CrawlingFF14.py
+      - name: Crawling FinalFantasy14 website
+        run: python Scheduler_FF14.py
         continue-on-error: true
 
-      - name: Run Maple Python script
-        run: python CrawlingMaple.py
+      - name: Crawling Maplestory website
+        run: python Scheduler_Maplestory.py
         continue-on-error: true
 
-      - name: Run PublicOfferingStock Python script
-        run: python CrawlingPublicOfferingStockSchedule.py
+      - name: Crawling PublicOfferingStock website
+        run: python Scheduler_PublicOfferingStockSchedule.py
         continue-on-error: true
 
           

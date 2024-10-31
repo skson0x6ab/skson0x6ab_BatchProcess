@@ -8,41 +8,24 @@ import os
 token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
 repo = 'DataRepository'
-file_path = 'Genshin.json'
-url = 'https://genshin.hoyoverse.com/m/ko/news/'
+file_path = 'FF14.json'
+url = 'https://www.ff14.co.kr/news/notice?category=3'
 
 if __name__ == "__main__":
     response = urlopen(url)
     soup = BeautifulSoup(response, "html.parser")
-    #테스트용 html 읽기
-    #with open('genshin.html', 'r', encoding='utf-8') as file:
-    #    soup = BeautifulSoup(file, "html.parser")
-    subParsingRule = [",\"2024-", ","]
-    tmpHTML = soup.find_all('script')
-    keyword = "NUXT"
-    tmpHTML_2 = ""
 
-    for i in tmpHTML:
-        if keyword in str(i):
-            tmpHTML_2 = str(i)
-            break
-
-    parts = tmpHTML_2.split(subParsingRule[0])
+    jsonText = soup.find('tbody').find_all('a')
+    jsonDate = soup.find_all('td', class_='date')
 
     DictionaryData = []
-    for j in range(1, len(parts)):
-        tmpString = parts[j].split(subParsingRule[1])
-
-        timestamp1 = "2024-" + tmpString[0].replace("\"","")
-        text1 = tmpString[1].replace("\"", "")
-
-        tmpdata = {
-            "Category": "[업데이트]",
-            "Text": text1,
-            "Date": timestamp1
+    for i in range(len(jsonText)):
+        tmpData = {
+            "Category": "[소식]",
+            "Text": jsonText[i].get_text(strip=True),
+            "Date": jsonDate[i].get_text(strip=True)
         }
-
-        DictionaryData.append(tmpdata)
+        DictionaryData.append(tmpData)
 
     jsonData = json.dumps(DictionaryData, ensure_ascii=False)
 
