@@ -1,12 +1,9 @@
-import requests
 from base64 import b64encode
+import requests
 import json
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import os
-from requests_html import HTMLSession
-import time
-
 
 token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
@@ -34,6 +31,7 @@ if __name__ == "__main__":
     for j in range(1, 2):
 
         text1 = tmpHTML_2
+        text1 = soup
         timestamp2 = ""
 
         tmpdata = {
