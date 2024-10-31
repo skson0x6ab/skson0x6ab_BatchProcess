@@ -9,6 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
+import time
 
 token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
@@ -28,10 +29,12 @@ if __name__ == "__main__":
     driver = webdriver.Chrome(service=service, options=options)
 
     driver.get(url)
-    response = ""
-    WebDriverWait(driver, 60).until(
+    WebDriverWait(driver, 90).until(
         lambda driver: driver.execute_script("return document.readyState") == "complete"
     )
+
+    time.sleep(30)
+
     response = driver.page_source
 
     print(response)
