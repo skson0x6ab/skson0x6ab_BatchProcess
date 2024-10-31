@@ -5,19 +5,28 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import os
 import logging
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 token = os.environ.get('GITHUB_TOKEN')
 owner = 'skson0x6ab'
 repo = 'DataRepository'
 file_path = 'StarRail.json'
 url = 'https://hsr.hoyoverse.com/ko-kr/news'
-
+#url = 'https://www.38.co.kr/html/fund/'
 logging.basicConfig(level=logging.INFO)
 
 if __name__ == "__main__":
-    response = urlopen(url)
-    soup = BeautifulSoup(response, "html.parser")
 
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service)
+    driver.get(url)
+    driver.implicitly_wait(5)
+    response = driver.page_source
+    #response = urlopen(url)
+    soup = BeautifulSoup(response, "html.parser")
     #테스트용 html 읽기
     #with open('starrail.html', 'r', encoding='utf-8') as file:
     #    soup = BeautifulSoup(file, "html.parser")
