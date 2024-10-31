@@ -33,8 +33,7 @@ if __name__ == "__main__":
     time.sleep(60)
 
     response = driver.page_source
-    
-    print(response)
+
     soup = BeautifulSoup(response, "html.parser")
 
     #테스트용 html 읽기
@@ -42,7 +41,7 @@ if __name__ == "__main__":
     #    soup = BeautifulSoup(file, "html.parser")
     news = soup.find_all('ul', class_='news')
     news_li = news[0].find_all('li')
-
+    print(news)
     DictionaryData = []
     for i in news_li:
         news__info = i.find('div', class_='news__info').find('h3').get_text()
