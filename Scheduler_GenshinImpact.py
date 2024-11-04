@@ -44,8 +44,11 @@ if __name__ == "__main__":
     news_li = news[0].find_all('li')
     logging.info(news_li)
 
+    table_size = 0
     DictionaryData = []
     for i in news_li:
+        if table_size == 3:
+            break
         news__info = i.find('div', class_='news__info').find('h3').get_text()
         news__date = i.find('div', class_='news__date')
 
@@ -56,6 +59,7 @@ if __name__ == "__main__":
         }
 
         DictionaryData.append(tmpdata)
+        table_size += 1
 
     jsonData = json.dumps(DictionaryData, ensure_ascii=False)
 
