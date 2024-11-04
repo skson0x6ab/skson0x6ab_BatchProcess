@@ -44,11 +44,6 @@ if __name__ == "__main__":
     #with open('starrail2.html', 'r', encoding='utf-8') as file:
     #    soup = BeautifulSoup(file, "html.parser")
     right = soup.find_all('div', class_='right')
-    #news_title = soup.find_all('div', class_='news-title')
-    #date_time = soup.find_all('div', class_='date-time')
-
-    #for i in news_title:
-    #    print(i)
     DictionaryData = []
     for i in right:
 

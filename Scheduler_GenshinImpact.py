@@ -15,6 +15,7 @@ owner = 'skson0x6ab'
 repo = 'DataRepository'
 file_path = 'Genshin.json'
 url = 'https://genshin.hoyoverse.com/m/ko/news/'
+logging.basicConfig(level=logging.INFO)
 
 if __name__ == "__main__":
 
@@ -31,7 +32,7 @@ if __name__ == "__main__":
     )
 
     time.sleep(60)
-
+     
     response = driver.page_source
 
     soup = BeautifulSoup(response, "html.parser")
@@ -41,11 +42,12 @@ if __name__ == "__main__":
     #    soup = BeautifulSoup(file, "html.parser")
     news = soup.find_all('ul', class_='news')
     news_li = news[0].find_all('li')
-    print(news)
+    logging.info(news_li)
+
     DictionaryData = []
     for i in news_li:
         news__info = i.find('div', class_='news__info').find('h3').get_text()
-        news__date = i.find('div', class_='news__date').get_text()
+        news__date = i.find('div', class_='news__date')
 
         tmpdata = {
             "Category": "[소식]",
