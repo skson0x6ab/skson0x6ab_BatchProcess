@@ -44,13 +44,12 @@ if __name__ == "__main__":
     news_li = news[0].find_all('li')
     logging.info(news_li)
 
-    table_size = 0
     DictionaryData = []
     for i in news_li:
-        if table_size == 3:
-            break
+        if i.find('div', class_='news__info') is None or i.find('div', class_='news__date') is None:
+            continue
         news__info = i.find('div', class_='news__info').find('h3').get_text()
-        news__date = i.find('div', class_='news__date')
+        news__date = i.find('div', class_='news__date').get_text()
 
         tmpdata = {
             "Category": "[소식]",
@@ -59,7 +58,6 @@ if __name__ == "__main__":
         }
 
         DictionaryData.append(tmpdata)
-        table_size += 1
 
     jsonData = json.dumps(DictionaryData, ensure_ascii=False)
 
