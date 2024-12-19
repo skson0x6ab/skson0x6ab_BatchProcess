@@ -2,7 +2,7 @@ name: Check DataRepository Commits
 
 on:
   schedule:
-    - cron: '0 */4 * * *'  # 매 4시간마다 실행
+    - cron: '30 */4 * * *'  # 매 4시간마다 실행
   workflow_dispatch:  # 수동으로 트리거할 수 있는 옵션
 
 jobs:
