@@ -48,9 +48,5 @@ jobs:
         run: python Scheduler_Maplestory.py
         continue-on-error: true
 
-      - name: Crawling PublicOfferingStock website
-        run: python Scheduler_PublicOfferingStockSchedule.py
-        continue-on-error: true
-
           
 
