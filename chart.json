@@ -1,5 +1,13 @@
 [
   {
+    "Date": "2024-12-24T08:06:19Z",
+    "Text": "NexonAPI_Maplestory.json"
+  },
+  {
+    "Date": "2024-12-24T07:17:16Z",
+    "Text": "NexonAPI_Maplestory.json"
+  },
+  {
     "Date": "2024-12-24T02:09:55Z",
     "Text": "zenlessRedeemCodeUsed.json"
   },
@@ -18,13 +26,5 @@
   {
     "Date": "2024-12-23T08:28:20Z",
     "Text": "Maplestory.json, chart.json"
-  },
-  {
-    "Date": "2024-12-23T08:08:08Z",
-    "Text": "chart.json"
-  },
-  {
-    "Date": "2024-12-23T04:09:50Z",
-    "Text": "genshinRedeemCode.json"
   }
 ]
