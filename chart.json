@@ -1,5 +1,9 @@
 [
   {
+    "Date": "2024-12-26T04:58:19Z",
+    "Text": "NexonAPI_Maplestory.json"
+  },
+  {
     "Date": "2024-12-26T00:54:26Z",
     "Text": "NexonAPI_Maplestory.json"
   },
@@ -30,9 +34,5 @@
   {
     "Date": "2024-12-25T11:04:41Z",
     "Text": "genshinRedeemCodeUsed.json"
-  },
-  {
-    "Date": "2024-12-25T04:09:52Z",
-    "Text": "starrailRedeemCode.json"
   }
 ]
