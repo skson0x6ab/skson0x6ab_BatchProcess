@@ -46,8 +46,10 @@ if __name__ == "__main__":
     news = soup.find_all('div', class_='news-list__item-content')
     DictionaryData = []
     for i in news:
-        news_title = i.find('div', class_='news-list__item-title').get_text().strip()
         news_date = i.select_one('.news-list__item-date > div').get_text().strip()
+        news_title = i.find('div', class_='news-list__item-title').get_text().strip()
+        if news_date == "2024/07/04":
+            continue
 
         tmpdata = {
             "Category": "[소식]",
@@ -56,7 +58,7 @@ if __name__ == "__main__":
         }
 
         DictionaryData.append(tmpdata)
-    
+
     jsonData = json.dumps(DictionaryData, ensure_ascii=False)
 
     headers = {
