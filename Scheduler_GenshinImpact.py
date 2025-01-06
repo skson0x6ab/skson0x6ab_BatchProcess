@@ -38,7 +38,7 @@ if __name__ == "__main__":
     soup = BeautifulSoup(response, "html.parser")
 
     #테스트용 html 읽기
-    #with open('genshin.html', 'r', encoding='utf-8') as file:
+    #with open('test.html', 'r', encoding='utf-8') as file:
     #    soup = BeautifulSoup(file, "html.parser")
     news = soup.find_all('ul', class_='news')
     news_li = news[0].find_all('li')

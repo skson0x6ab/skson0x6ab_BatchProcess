@@ -35,31 +35,28 @@ if __name__ == "__main__":
      
     response = driver.page_source
 
+    #운영 소스
     soup = BeautifulSoup(response, "html.parser")
-    logging.info(soup)
-    #테스트용 html 읽기
-    #with open('genshin.html', 'r', encoding='utf-8') as file:
-    #    soup = BeautifulSoup(file, "html.parser")
-    news = soup.find_all('ul', class_='news')
 
-    logging.info(news)
     """
-    news_li = news[0].find_all('li')
+    #테스트용 html 읽기
+    #with open('test.html', 'r', encoding='utf-8') as file:
+    #    soup = BeautifulSoup(file, "html.parser")
+    """
+    news = soup.find_all('div', class_='news-list__item-content')
     DictionaryData = []
-    for i in news_li:
-        if i.find('div', class_='news__info') is None or i.find('div', class_='news__date') is None:
-            continue
-        news__info = i.find('div', class_='news__info').find('h3').get_text()
-        news__date = i.find('div', class_='news__date').get_text()
+    for i in news:
+        news_title = i.find('div', class_='news-list__item-title').get_text()
+        news_date = i.select_one('.news-list__item-date > div').get_text()
 
         tmpdata = {
             "Category": "[소식]",
-            "Text": news__info,
-            "Date": news__date
+            "Text": news_title,
+            "Date": news_date
         }
 
         DictionaryData.append(tmpdata)
-
+    
     jsonData = json.dumps(DictionaryData, ensure_ascii=False)
 
     headers = {
@@ -100,4 +97,3 @@ if __name__ == "__main__":
         print("File added/updated successfully!")
     else:
         print(f"Error: {response.json()}")
-    """
