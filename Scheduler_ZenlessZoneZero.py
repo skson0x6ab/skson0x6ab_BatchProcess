@@ -36,7 +36,7 @@ if __name__ == "__main__":
     response = driver.page_source
 
     soup = BeautifulSoup(response, "html.parser")
-
+    logging.info(soup)
     #테스트용 html 읽기
     #with open('genshin.html', 'r', encoding='utf-8') as file:
     #    soup = BeautifulSoup(file, "html.parser")
