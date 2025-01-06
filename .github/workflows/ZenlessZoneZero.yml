@@ -1,0 +1,41 @@
+name: Run scheduler
+
+on:
+  schedule:
+    - cron: '0 23 * * *' # KST 8시마다 실행
+  workflow_dispatch:
+
+jobs:
+  run-code:
+    runs-on: ubuntu-24.04
+    env:
+      GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Install system dependencies
+        run: | 
+          sudo apt-get update
+          sudo apt-get install -y build-essential libffi-dev 
+          sudo apt-get install -y ca-certificates 
+          sudo apt-get install -y wget 
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Crawling Zenless Zone Zero website
+        run: python Scheduler_ZenlessZoneZero.py
+        continue-on-error: true
+
+
+          
+
