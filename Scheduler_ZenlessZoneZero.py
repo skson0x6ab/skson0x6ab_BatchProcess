@@ -46,8 +46,8 @@ if __name__ == "__main__":
     news = soup.find_all('div', class_='news-list__item-content')
     DictionaryData = []
     for i in news:
-        news_title = i.find('div', class_='news-list__item-title').get_text()
-        news_date = i.select_one('.news-list__item-date > div').get_text()
+        news_title = i.find('div', class_='news-list__item-title').get_text().strip()
+        news_date = i.select_one('.news-list__item-date > div').get_text().strip()
 
         tmpdata = {
             "Category": "[소식]",
