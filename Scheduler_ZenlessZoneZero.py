@@ -41,9 +41,10 @@ if __name__ == "__main__":
     #with open('genshin.html', 'r', encoding='utf-8') as file:
     #    soup = BeautifulSoup(file, "html.parser")
     news = soup.find_all('ul', class_='news')
-    news_li = news[0].find_all('li')
-    logging.info(news)
 
+    logging.info(news)
+    """
+    news_li = news[0].find_all('li')
     DictionaryData = []
     for i in news_li:
         if i.find('div', class_='news__info') is None or i.find('div', class_='news__date') is None:
@@ -99,3 +100,4 @@ if __name__ == "__main__":
         print("File added/updated successfully!")
     else:
         print(f"Error: {response.json()}")
+    """
