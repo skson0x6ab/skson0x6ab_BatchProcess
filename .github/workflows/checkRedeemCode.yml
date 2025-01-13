@@ -29,15 +29,15 @@ jobs:
         run: |
           npm install
 
-      - name: Crawling GenshinImpact CodeRedeem
+      - name: API request GenshinImpact CodeRedeem
         run: node Scheduler_GenshinCheckRedeemCode.js
         continue-on-error: true
 
-      - name: Crawling GenshinImpact CodeRedeem
+      - name: API request Honkai StarRail CodeRedeem
         run: node Scheduler_StarrailCheckRedeemCode.js
         continue-on-error: true
 
-      - name: Crawling GenshinImpact CodeRedeem
+      - name: API request Zenless Zone Zero CodeRedeem
         run: node Scheduler_ZenlessCheckRedeemCode.js
         continue-on-error: true
 

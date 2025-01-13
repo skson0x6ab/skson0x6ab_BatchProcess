@@ -2,7 +2,7 @@ name: Run scheduler
 
 on:
   schedule:
-    - cron: '00 22 * * *' # KST 8시마다 실행
+    - cron: '30 21 * * *' # KST 매일 6시 30분에 실행
   workflow_dispatch:
 
 jobs:

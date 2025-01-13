@@ -2,7 +2,7 @@ name: Run scheduler
 
 on:
   schedule:
-    - cron: '0 23 * * *' # KST 8시마다 실행
+    - cron: '30 21 * * *' # KST 매일 6시 30분에 실행
   workflow_dispatch:
 
 jobs:
@@ -40,7 +40,7 @@ jobs:
         run: python Scheduler_StarRail.py
         continue-on-error: true
 
-      - name: Crawling FinalFantasy14 website
+      - name: Crawling FinalFantasy XIV website
         run: python Scheduler_FF14.py
         continue-on-error: true
 
