@@ -2,7 +2,7 @@ name: Check CodeRedeem
 
 on:
   schedule:
-    - cron: '0 0-21 * * *' # 07시 08시 제외 하고 실행
+    - cron: '0 0-22 * * *' # 00시 ~ 07시, 10시 ~ 23시 실행
   workflow_dispatch:
 
 jobs:
