@@ -1,4 +1,4 @@
-name: Run scheduler
+name: Start crawling the website
 
 on:
   schedule:

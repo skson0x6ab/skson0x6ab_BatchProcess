@@ -1,4 +1,4 @@
-name: Check CodeRedeem
+name: Start checking for RedeemCode
 
 on:
   schedule:
